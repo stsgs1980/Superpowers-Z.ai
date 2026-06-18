@@ -22,7 +22,7 @@ WHEN receiving code review feedback:
 4. EVALUATE: Technically sound for THIS codebase?
 5. RESPOND: Technical acknowledgment or reasoned pushback
 6. IMPLEMENT: One item at a time, test each
-```markdown
+```
 
 ## Forbidden Responses
 
@@ -45,7 +45,7 @@ IF any item is unclear:
   ASK for clarification on unclear items
 
 WHY: Items may be related. Partial understanding = wrong implementation.
-```text
+```
 
 **Example:**
 ```text
@@ -54,7 +54,7 @@ You understand 1,2,3,6. Unclear on 4,5.
 
 ❌ WRONG: Implement 1,2,3,6 now, ask about 4,5 later
 ✅ RIGHT: "I understand items 1,2,3,6. Need clarification on 4 and 5 before proceeding."
-```markdown
+```
 
 ## Source-Specific Handling
 
@@ -81,7 +81,7 @@ IF can't easily verify:
 
 IF conflicts with your human partner's prior decisions:
   Stop and discuss with your human partner first
-```markdown
+```
 
 **your human partner's rule:** "External feedback - be skeptical, but check carefully"
 
@@ -93,7 +93,7 @@ IF reviewer suggests "implementing properly":
 
   IF unused: "This endpoint isn't called. Remove it (YAGNI)?"
   IF used: Then implement properly
-```markdown
+```
 
 **your human partner's rule:** "You and reviewer both report to me. If we don't need this feature, don't add it."
 
@@ -108,7 +108,7 @@ FOR multi-item feedback:
      - Complex fixes (refactoring, logic)
   3. Test each fix individually
   4. Verify no regressions
-```markdown
+```
 
 ## When To Push Back
 
@@ -141,7 +141,7 @@ When feedback IS correct:
 ❌ "Thanks for catching that!"
 ❌ "Thanks for [anything]"
 ❌ ANY gratitude expression
-```text
+```
 
 **Why no thanks:** Actions speak. Just fix it. The code itself shows you heard the feedback.
 
@@ -157,7 +157,7 @@ If you pushed back and were wrong:
 ❌ Long apology
 ❌ Defending why you pushed back
 ❌ Over-explaining
-```markdown
+```
 
 State the correction factually and move on.
 
@@ -179,26 +179,26 @@ State the correction factually and move on.
 ```text
 Reviewer: "Remove legacy code"
 ❌ "You're absolutely right! Let me remove that..."
-```text
+```
 
 **Technical Verification (Good):**
 ```text
 Reviewer: "Remove legacy code"
 ✅ "Checking... build target is 10.15+, this API needs 13+. Need legacy for backward compat. Current impl has wrong bundle ID - fix it or drop pre-13 support?"
-```text
+```
 
 **YAGNI (Good):**
 ```bash
 Reviewer: "Implement proper metrics tracking with database, date filters, CSV export"
 ✅ "Grepped codebase - nothing calls this endpoint. Remove it (YAGNI)? Or is there usage I'm missing?"
-```text
+```
 
 **Unclear Item (Good):**
 ```text
 your human partner: "Fix items 1-6"
 You understand 1,2,3,6. Unclear on 4,5.
 ✅ "Understand 1,2,3,6. Need clarification on 4 and 5 before implementing."
-```markdown
+```
 
 ## GitHub Thread Replies
 

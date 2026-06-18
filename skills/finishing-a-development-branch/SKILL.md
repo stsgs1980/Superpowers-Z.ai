@@ -22,7 +22,7 @@ Guide completion of development work by presenting clear options and handling ch
 ```bash
 # Run project's test suite
 npm test / cargo test / pytest / go test ./...
-```text
+```
 
 **If tests fail:**
 ```text
@@ -31,7 +31,7 @@ Tests failing (<N> failures). Must fix before completing:
 [Show failures]
 
 Cannot proceed with merge/PR until tests pass.
-```text
+```
 
 Stop. Don't proceed to Step 2.
 
@@ -44,7 +44,7 @@ Stop. Don't proceed to Step 2.
 ```bash
 GIT_DIR=$(cd "$(git rev-parse --git-dir)" 2>/dev/null && pwd -P)
 GIT_COMMON=$(cd "$(git rev-parse --git-common-dir)" 2>/dev/null && pwd -P)
-```markdown
+```
 
 This determines which menu to show and how cleanup works:
 
@@ -59,7 +59,7 @@ This determines which menu to show and how cleanup works:
 ```bash
 # Try common base branches
 git merge-base HEAD main 2>/dev/null || git merge-base HEAD master 2>/dev/null
-```markdown
+```
 
 Or ask: "This branch split from main - is that correct?"
 
@@ -76,7 +76,7 @@ Implementation complete. What would you like to do?
 4. Discard this work
 
 Which option?
-```text
+```
 
 **Detached HEAD — present exactly these 3 options:**
 
@@ -88,7 +88,7 @@ Implementation complete. You're on a detached HEAD (externally managed workspace
 3. Discard this work
 
 Which option?
-```markdown
+```
 
 **Don't add explanation** - keep options concise.
 
@@ -110,13 +110,13 @@ git merge <feature-branch>
 <test command>
 
 # Only after merge succeeds: cleanup worktree (Step 6), then delete branch
-```bash
+```
 
 Then: Cleanup worktree (Step 6), then delete branch:
 
 ```bash
 git branch -d <feature-branch>
-```markdown
+```
 
 #### Option 2: Push and Create PR
 
@@ -133,7 +133,7 @@ gh pr create --title "<title>" --body "$(cat <<'EOF'
 - [ ] <verification steps>
 EOF
 )"
-```markdown
+```
 
 **Do NOT clean up worktree** — user needs it alive to iterate on PR feedback.
 
@@ -153,7 +153,7 @@ This will permanently delete:
 - Worktree at <path>
 
 Type 'discard' to confirm.
-```text
+```
 
 Wait for exact confirmation.
 
@@ -161,12 +161,12 @@ If confirmed:
 ```bash
 MAIN_ROOT=$(git -C "$(git rev-parse --git-common-dir)/.." rev-parse --show-toplevel)
 cd "$MAIN_ROOT"
-```bash
+```
 
 Then: Cleanup worktree (Step 6), then force-delete branch:
 ```bash
 git branch -D <feature-branch>
-```markdown
+```
 
 ### Step 6: Cleanup Workspace
 
@@ -176,7 +176,7 @@ git branch -D <feature-branch>
 GIT_DIR=$(cd "$(git rev-parse --git-dir)" 2>/dev/null && pwd -P)
 GIT_COMMON=$(cd "$(git rev-parse --git-common-dir)" 2>/dev/null && pwd -P)
 WORKTREE_PATH=$(git rev-parse --show-toplevel)
-```text
+```
 
 **If `GIT_DIR == GIT_COMMON`:** Normal repo, no worktree to clean up. Done.
 
@@ -187,7 +187,7 @@ MAIN_ROOT=$(git -C "$(git rev-parse --git-common-dir)/.." rev-parse --show-tople
 cd "$MAIN_ROOT"
 git worktree remove "$WORKTREE_PATH"
 git worktree prune  # Self-healing: clean up any stale registrations
-```bash
+```
 
 **Otherwise:** The host environment (harness) owns this workspace. Do NOT remove it. If your platform provides a workspace-exit tool, use it. Otherwise, leave the workspace in place.
 

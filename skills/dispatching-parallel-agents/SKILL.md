@@ -31,7 +31,7 @@ digraph when_to_use {
     "Can they work in parallel?" -> "Parallel dispatch" [label="yes"];
     "Can they work in parallel?" -> "Sequential agents" [label="no - shared state"];
 }
-```text
+```
 
 **Use when:**
 - 3+ test files failing with different root causes
@@ -71,7 +71,7 @@ Task("Fix agent-tool-abort.test.ts failures")
 Task("Fix batch-completion-behavior.test.ts failures")
 Task("Fix tool-approval-race-conditions.test.ts failures")
 // All three run concurrently
-```markdown
+```
 
 ### 4. Review and Integrate
 
@@ -107,7 +107,7 @@ These are timing/race condition issues. Your task:
 Do NOT just increase timeouts - find the real issue.
 
 Return: Summary of what you found and what you fixed.
-```markdown
+```
 
 ## Common Mistakes
 
@@ -146,7 +146,7 @@ Return: Summary of what you found and what you fixed.
 Agent 1 → Fix agent-tool-abort.test.ts
 Agent 2 → Fix batch-completion-behavior.test.ts
 Agent 3 → Fix tool-approval-race-conditions.test.ts
-```text
+```
 
 **Results:**
 - Agent 1: Replaced timeouts with event-based waiting

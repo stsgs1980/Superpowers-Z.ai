@@ -32,7 +32,7 @@ Thinking "skip TDD just this once"? Stop. That's rationalization.
 
 ```text
 NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
-```text
+```
 
 Write code before the test? Delete it. Start over.
 
@@ -66,7 +66,7 @@ digraph tdd_cycle {
     verify_green -> next;
     next -> red;
 }
-```markdown
+```
 
 ### RED - Write Failing Test
 
@@ -87,7 +87,7 @@ test('retries failed operations 3 times', async () => {
   expect(result).toBe('success');
   expect(attempts).toBe(3);
 });
-```text
+```
 Clear name, tests real behavior, one thing
 </Good>
 
@@ -101,7 +101,7 @@ test('retry works', async () => {
   await retryOperation(mock);
   expect(mock).toHaveBeenCalledTimes(3);
 });
-```text
+```
 Vague name, tests mock not code
 </Bad>
 
@@ -116,7 +116,7 @@ Vague name, tests mock not code
 
 ```bash
 npm test path/to/test.test.ts
-```bash
+```
 
 Confirm:
 - Test fails (not errors)
@@ -143,7 +143,7 @@ async function retryOperation<T>(fn: () => Promise<T>): Promise<T> {
   }
   throw new Error('unreachable');
 }
-```text
+```
 Just enough to pass
 </Good>
 
@@ -159,7 +159,7 @@ async function retryOperation<T>(
 ): Promise<T> {
   // YAGNI
 }
-```text
+```
 Over-engineered
 </Bad>
 
@@ -171,7 +171,7 @@ Don't add features, refactor other code, or "improve" beyond the test.
 
 ```bash
 npm test path/to/test.test.ts
-```text
+```
 
 Confirm:
 - Test passes
@@ -297,13 +297,13 @@ test('rejects empty email', async () => {
   const result = await submitForm({ email: '' });
   expect(result.error).toBe('Email required');
 });
-```bash
+```
 
 **Verify RED**
 ```bash
 $ npm test
 FAIL: expected 'Email required', got undefined
-```javascript
+```
 
 **GREEN**
 ```typescript
@@ -313,13 +313,13 @@ function submitForm(data: FormData) {
   }
   // ...
 }
-```bash
+```
 
 **Verify GREEN**
 ```bash
 $ npm test
 PASS
-```text
+```
 
 **REFACTOR**
 Extract validation for multiple fields if needed.
@@ -366,6 +366,6 @@ When adding mocks or test utilities, read @testing-anti-patterns.md to avoid com
 ```text
 Production code → test exists and failed first
 Otherwise → not TDD
-```text
+```
 
 No exceptions without your human partner's permission.

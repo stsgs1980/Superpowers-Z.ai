@@ -77,7 +77,7 @@ skills/
   skill-name/
     SKILL.md              # Main reference (required)
     supporting-file.*     # Only if needed
-```bash
+```
 
 **Flat namespace** - all skills in one searchable namespace
 
@@ -134,7 +134,7 @@ What goes wrong + fixes
 
 ## Real-World Impact (optional)
 Concrete results
-```markdown
+```
 
 
 ## Claude Search Optimization (CSO)
@@ -169,7 +169,7 @@ description: Use when executing implementation plans with independent tasks in t
 
 # ✅ GOOD: Triggering conditions only
 description: Use when implementing any feature or bugfix, before writing implementation code
-```text
+```
 
 **Content:**
 - Use concrete triggers, symptoms, and situations that signal this skill applies
@@ -194,7 +194,7 @@ description: Use when tests have race conditions, timing dependencies, or pass/f
 
 # ✅ GOOD: Technology-specific skill with explicit trigger
 description: Use when using React Router and handling authentication redirects
-```markdown
+```
 
 ### 2. Keyword Coverage
 
@@ -228,7 +228,7 @@ search-conversations supports --text, --both, --after DATE, --before DATE, --lim
 
 # ✅ GOOD: Reference --help
 search-conversations supports multiple modes and filters. Run --help for details.
-```markdown
+```
 
 **Use cross-references:**
 ```markdown
@@ -238,7 +238,7 @@ When searching, dispatch subagent with template...
 
 # ✅ GOOD: Reference other skill
 Always use subagents (50-100x context savings). REQUIRED: Use [other-skill-name] for workflow.
-```markdown
+```
 
 **Compress examples:**
 ```markdown
@@ -251,7 +251,7 @@ You: I'll search past conversations for React Router authentication patterns.
 Partner: "How did we handle auth errors in React Router?"
 You: Searching...
 [Dispatch subagent → synthesis]
-```bash
+```
 
 **Eliminate redundancy:**
 - Don't repeat what's in cross-referenced skills
@@ -263,7 +263,7 @@ You: Searching...
 wc -w skills/path/SKILL.md
 # getting-started workflows: aim for <150 each
 # Other frequently-loaded: aim for <200 total
-```text
+```
 
 **Name by what you DO or core insight:**
 - [OK] `condition-based-waiting` > `async-test-helpers`
@@ -300,7 +300,7 @@ digraph when_flowchart {
     "Decision where I might go wrong?" -> "Small inline flowchart" [label="yes"];
     "Decision where I might go wrong?" -> "Use markdown" [label="no"];
 }
-```text
+```
 
 **Use flowcharts ONLY for:**
 - Non-obvious decision points
@@ -319,7 +319,7 @@ See @graphviz-conventions.dot for graphviz style rules.
 ```bash
 ./render-graphs.js ../some-skill           # Each diagram separately
 ./render-graphs.js ../some-skill --combine # All diagrams in one SVG
-```markdown
+```
 
 ## Code Examples
 
@@ -350,7 +350,7 @@ You're good at porting - one great example is enough.
 ```text
 defense-in-depth/
   SKILL.md    # Everything inline
-```markdown
+```
 When: All content fits, no heavy reference needed
 
 ### Skill with Reusable Tool
@@ -358,7 +358,7 @@ When: All content fits, no heavy reference needed
 condition-based-waiting/
   SKILL.md    # Overview + patterns
   example.ts  # Working helpers to adapt
-```markdown
+```
 When: Tool is reusable code, not just narrative
 
 ### Skill with Heavy Reference
@@ -368,14 +368,14 @@ pptx/
   pptxgenjs.md   # 600 lines API reference
   ooxml.md       # 500 lines XML structure
   scripts/       # Executable tools
-```markdown
+```
 When: Reference material too large for inline
 
 ## The Iron Law (Same as TDD)
 
 ```text
 NO SKILL WITHOUT A FAILING TEST FIRST
-```bash
+```
 
 This applies to NEW skills AND EDITS to existing skills.
 
@@ -469,7 +469,7 @@ Don't just state the rule - forbid specific workarounds:
 <Bad>
 ```markdown
 Write code before test? Delete it.
-```text
+```
 </Bad>
 
 <Good>
@@ -481,7 +481,7 @@ Write code before test? Delete it. Start over.
 - Don't "adapt" it while writing tests
 - Don't look at it
 - Delete means delete
-```markdown
+```
 </Good>
 
 ### Address "Spirit vs Letter" Arguments
@@ -490,7 +490,7 @@ Add foundational principle early:
 
 ```markdown
 **Violating the letter of the rules is violating the spirit of the rules.**
-```markdown
+```
 
 This cuts off entire class of "I'm following the spirit" rationalizations.
 
@@ -504,7 +504,7 @@ Capture rationalizations from baseline testing (see Testing section below). Ever
 | "Too simple to test" | Simple code breaks. Test takes 30 seconds. |
 | "I'll test after" | Tests passing immediately prove nothing. |
 | "Tests after achieve same goals" | Tests-after = "what does this do?" Tests-first = "what should this do?" |
-```markdown
+```
 
 ### Create Red Flags List
 
@@ -520,7 +520,7 @@ Make it easy for agents to self-check when rationalizing:
 - "This is different because..."
 
 **All of these mean: Delete code. Start over with TDD.**
-```markdown
+```
 
 ### Update CSO for Violation Symptoms
 
@@ -528,7 +528,7 @@ Add to description: symptoms of when you're ABOUT to violate the rule:
 
 ```yaml
 description: use when implementing any feature or bugfix, before writing implementation code
-```bash
+```
 
 ## RED-GREEN-REFACTOR for Skills
 
@@ -573,7 +573,7 @@ example-js.js, example-py.py, example-go.go
 ```dot
 step1 [label="import fs"];
 step2 [label="read file"];
-```bash
+```
 **Why bad:** Can't copy-paste, hard to read
 
 ### [FAIL] Generic Labels

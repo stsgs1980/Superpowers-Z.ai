@@ -17,7 +17,7 @@ Random fixes waste time and create new bugs. Quick patches mask underlying issue
 
 ```text
 NO FIXES WITHOUT ROOT CAUSE INVESTIGATION FIRST
-```markdown
+```
 
 If you haven't completed Phase 1, you cannot propose fixes.
 
@@ -84,7 +84,7 @@ You MUST complete each phase before proceeding to the next.
    Run once to gather evidence showing WHERE it breaks
    THEN analyze evidence to identify failing component
    THEN investigate that specific component
-```text
+```
 
    **Example (multi-layer system):**
    ```bash
@@ -103,7 +103,7 @@ You MUST complete each phase before proceeding to the next.
 
    # Layer 4: Actual signing
    codesign --sign "$IDENTITY" --verbose=4 "$APP"
-```bash
+```
 
    **This reveals:** Which layer fails (secrets -> workflow [OK], workflow -> build [FAIL])
 
