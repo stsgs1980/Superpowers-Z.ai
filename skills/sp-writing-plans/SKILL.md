@@ -81,7 +81,7 @@ This structure informs the task decomposition. Each task should produce self-con
 
 - [ ] **Step 1: Write the failing test**
 
-```javascript
+```
 def test_specific_behavior():
     result = function(input)
     assert result == expected
@@ -94,7 +94,7 @@ Expected: FAIL with "function not defined"
 
 - [ ] **Step 3: Write minimal implementation**
 
-```javascript
+```
 def function(input):
     return expected
 ```
@@ -106,7 +106,7 @@ Expected: PASS
 
 - [ ] **Step 5: Commit**
 
-```bash
+```
 git add tests/path/test.py src/path/file.py
 git commit -m "feat: add specific feature"
 ```

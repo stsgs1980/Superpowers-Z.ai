@@ -78,7 +78,7 @@ CORE_SKILLS=(
     using-git-worktrees
     verification-before-completion
     writing-skills
-    # Phase 2: Native Z.ai skills (always install)
+    # Phase 2: Native Z.ai skills
     zai-debugging
     zai-verify-before-claim
     zai-code-planning

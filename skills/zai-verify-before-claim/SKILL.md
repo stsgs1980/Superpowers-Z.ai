@@ -1,6 +1,6 @@
 ---
 name: zai-verify-before-claim
-description: Verify that work is actually complete before telling the user it's done. Use this skill before calling Complete, before claiming tests pass, before saying "the build works", or whenever you're about to deliver a result. Prevents false success claims that waste the user's time.
+description: Verify work is actually complete before claiming it's done. Use before calling Complete, before claiming "tests pass", "the build works", "it's ready", "done", or delivering any result. Prevents false success claims. Also use after running commands to confirm output matches expectations.
 ---
 
 # Verify Before Claiming
@@ -31,6 +31,17 @@ If you can't show evidence, don't claim it. Say "I believe X is working based on
 - "The PDF is generated correctly" — but you didn't open or validate it
 
 If you catch yourself about to make one of these, stop and run the verification first.
+
+## Bad vs Good
+
+**Bad:** "The API is working correctly now."
+**Good:** "The API returns 200 on `curl localhost:8000/notes` with the expected JSON body. Here's the output:"
+
+**Bad:** "I've fixed the bug and the tests pass."
+**Good:** "Ran `pytest tests/test_auth.py` — 12 passed, 0 failed. The root cause was a null check missing on line 42."
+
+**Bad:** "The PDF was generated successfully."
+**Good:** "`ls -la report.pdf` shows 245KB. The PDF has 3 pages with the expected headers."
 
 ## When NOT to Use This Skill
 

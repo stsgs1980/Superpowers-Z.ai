@@ -1,6 +1,6 @@
 ---
 name: zai-skill-authoring
-description: Write and iterate on Z.ai skills using the skill-creator methodology combined with test-driven development. Use when the user wants to create a new skill, improve an existing one, or debug a skill that isn't triggering correctly. Combines the Z.ai skill-creator's progressive disclosure approach with Superpowers' emphasis on concrete examples and verification.
+description: Write and iterate on Z.ai skills. Use when the user says "create a skill", "write a skill", "new skill", "improve this skill", "fix the skill trigger", "skill isn't working", or "debug a skill". Combines Z.ai skill-creator progressive disclosure with Superpowers' test-driven approach and concrete examples.
 ---
 
 # Z.ai Skill Authoring
