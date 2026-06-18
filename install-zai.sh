@@ -27,10 +27,16 @@ else
     TARGET_DIR="/home/z/my-project/skills"
 fi
 
-ACTION="${1:-install}"
+ACTION="install"
+FORCE=false
 CORE_ONLY=false
 for arg in "$@"; do
-    if [ "$arg" = "--core-only" ]; then CORE_ONLY=true; fi
+    case "$arg" in
+        --force)    FORCE=true ;;
+        --core-only) CORE_ONLY=true ;;
+        uninstall)  ACTION="uninstall" ;;
+        status)     ACTION="status" ;;
+    esac
 done
 
 # --- List of all skill directories (source names, before sp- prefix) ---
@@ -132,12 +138,7 @@ if [ "$ACTION" = "uninstall" ]; then
 fi
 
 # --- Install / Update ---
-FORCE=false
-if [ "$ACTION" = "--force" ] || [ "$ACTION" = "install" ]; then
-    if [ "$ACTION" = "--force" ]; then
-        FORCE=true
-    fi
-else
+if [ "$ACTION" != "install" ]; then
     echo "Usage: bash install-zai.sh [--force] [--core-only] | uninstall | status"
     exit 1
 fi
@@ -161,9 +162,10 @@ installed=0
 updated=0
 skipped=0
 
-for skill_dir in "$PLUGIN_SKILLS"/*/; do
+for skill in "${SKILLS[@]}"; do
+    skill_dir="$PLUGIN_SKILLS/$skill"
     [ -d "$skill_dir" ] || continue
-    name=$(basename "$skill_dir")
+    name="$skill"
 
     # Determine target name: add sp- prefix if not already present
     if [[ "$name" == sp-* ]]; then
