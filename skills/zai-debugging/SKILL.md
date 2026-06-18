@@ -1,6 +1,6 @@
 ---
 name: zai-debugging
-description: Systematic debugging for Z.ai sandbox. Use this skill whenever code fails at runtime, tests fail unexpectedly, a build step errors out, or the user says "fix this bug", "debug", "why is this broken", "it doesn't work", or similar. Applies to Type 3 (code) and Type 4 (data processing) tasks. Do NOT use for document generation issues (Type 1/2) — those have their own skill chains.
+description: Systematic debugging for Z.ai sandbox. Use this skill whenever code fails at runtime, "tests are failing", "tests fail unexpectedly", a build step errors out, or the user says "fix this bug", "debug", "why is this broken", "it doesn't work", or similar. Applies to Type 3 (code) and Type 4 (data processing) tasks. Do NOT use for document generation issues (Type 1/2) — those have their own skill chains.
 ---
 
 # Z.ai Debugging
