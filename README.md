@@ -13,6 +13,7 @@ Superpowers is a complete software development methodology for your coding agent
 - Pre-review checklists and structured code review workflows
 - Parallel agent dispatching for independent concurrent tasks
 - GLM-condensed references for 6 core skills (optional optimization layer)
+- 4 native Z.ai skills written in ZCode style (debugging, verification, planning, skill authoring)
 - One-command install and update via install-zai.sh
 
 ## Tech Stack
@@ -171,6 +172,15 @@ The agent checks for relevant skills before any task. Mandatory workflows, not s
 **Meta**
 - **writing-skills** - Create new skills following best practices (includes testing methodology)
 - **using-superpowers** - Introduction to the skills system
+
+### Native Z.ai Skills (Phase 2)
+
+Written in ZCode skill-creator style: imperative tone, progressive disclosure, examples over rules.
+
+- **zai-debugging** - 4-phase debugging (Read Error, Narrow Scope, Hypothesize, Fix & Verify) with Z.ai sandbox pitfalls
+- **zai-verify-before-claim** - Prevent false success claims by requiring evidence before delivery
+- **zai-code-planning** - Type-aware planning: routes to Outline tool for documents (Type 1/2) or detailed task plans for code (Type 3)
+- **zai-skill-authoring** - Skill creation methodology combining Z.ai progressive disclosure with Superpowers TDD
 
 ## Updating
 

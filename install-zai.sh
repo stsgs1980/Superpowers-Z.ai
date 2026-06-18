@@ -2,7 +2,7 @@
 # install-zai.sh - Z.ai installer for Superpowers skills
 # Usage:
 #   bash install-zai.sh              # install or update all skills
-#   bash install-zai.sh --core-only  # install only Tier 1+2 skills (8 skills, skip Tier 3)
+#   bash install-zai.sh --core-only  # install only Tier 1+2 skills + Z.ai native skills
 #   bash install-zai.sh --force      # reinstall even if exists (overwrite)
 #   bash install-zai.sh --force --core-only  # force reinstall core skills only
 #   bash install-zai.sh uninstall    # remove all sp-* skills
@@ -55,6 +55,11 @@ ALL_SKILLS=(
     using-superpowers
     verification-before-completion
     writing-skills
+    # Phase 2: Native Z.ai skills
+    zai-debugging
+    zai-verify-before-claim
+    zai-code-planning
+    zai-skill-authoring
 )
 
 # Core skills: Tier 1 (directly useful) + Tier 2 (useful with adaptation)
@@ -73,6 +78,11 @@ CORE_SKILLS=(
     using-git-worktrees
     verification-before-completion
     writing-skills
+    # Phase 2: Native Z.ai skills (always install)
+    zai-debugging
+    zai-verify-before-claim
+    zai-code-planning
+    zai-skill-authoring
 )
 
 # Select which list to use
@@ -168,7 +178,8 @@ for skill in "${SKILLS[@]}"; do
     name="$skill"
 
     # Determine target name: add sp- prefix if not already present
-    if [[ "$name" == sp-* ]]; then
+    # Z.ai native skills (zai-*) keep their name as-is
+    if [[ "$name" == sp-* ]] || [[ "$name" == zai-* ]]; then
         target_name="$name"
     elif [ "$name" = "writing-plans" ]; then
         target_name="sp-writing-plans"
