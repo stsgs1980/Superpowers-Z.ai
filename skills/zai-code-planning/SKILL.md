@@ -1,6 +1,6 @@
 ---
 name: zai-code-planning
-description: Plan code implementation tasks in Z.ai. Use this skill before starting any multi-step code task (Type 3) — building a feature, refactoring a module, setting up a project, or implementing an API. For document/report planning (Type 1/2), the built-in Outline tool handles that — do NOT use this skill. Routes between detailed plans (code) and outline mode (documents) based on task type.
+description: Plan code implementation tasks in Z.ai. Use this skill before starting any multi-step code task (Type 3) — when the user says "build a feature", "implement X", "set up a project", "add an API endpoint", "refactor this module", or "let's plan this out". For document/report planning (Type 1/2), the built-in Outline tool handles that — do NOT use this skill. Routes between detailed plans (code) and outline mode (documents) based on task type.
 ---
 
 # Z.ai Code Planning

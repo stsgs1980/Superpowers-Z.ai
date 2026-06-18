@@ -31,3 +31,9 @@ If you can't show evidence, don't claim it. Say "I believe X is working based on
 - "The PDF is generated correctly" — but you didn't open or validate it
 
 If you catch yourself about to make one of these, stop and run the verification first.
+
+## When NOT to Use This Skill
+
+- The user is asking you to draft or brainstorm — there's nothing to verify yet
+- You're in the middle of writing code and haven't claimed anything
+- The user explicitly says "just show me the approach" or "don't run it yet"
