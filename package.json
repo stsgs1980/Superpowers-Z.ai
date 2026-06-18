@@ -1,0 +1,8 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "@zcode/superpowers-plugin",
+  "version": "5.1.0-zai.1",
+  "private": true,
+  "license": "MIT",
+  "description": "Superpowers для Z.ai sandbox с моделями GLM — адаптированная версия плагина с поддержкой ZCode tool mapping и оптимизацией под GLM контекстное окно."
+}
