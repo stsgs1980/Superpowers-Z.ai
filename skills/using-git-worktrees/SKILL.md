@@ -21,14 +21,14 @@ Ensure work happens in an isolated workspace. Prefer your platform's native work
 GIT_DIR=$(cd "$(git rev-parse --git-dir)" 2>/dev/null && pwd -P)
 GIT_COMMON=$(cd "$(git rev-parse --git-common-dir)" 2>/dev/null && pwd -P)
 BRANCH=$(git branch --show-current)
-```bash
+```
 
 **Submodule guard:** `GIT_DIR != GIT_COMMON` is also true inside git submodules. Before concluding "already in a worktree," verify you are not in a submodule:
 
 ```bash
 # If this returns a path, you're in a submodule, not a worktree  -  treat as normal repo
 git rev-parse --show-superproject-working-tree 2>/dev/null
-```text
+```
 
 **If `GIT_DIR != GIT_COMMON` (and not a submodule):** You are already in a linked worktree. Skip to Step 3 (Project Setup). Do NOT create another worktree.
 
@@ -64,20 +64,24 @@ Only proceed to Step 1b if you have no native worktree tool available.
 
 Follow this priority order. Explicit user preference always beats observed filesystem state.
 
+**In Z.ai sandbox:** Use `/tmp/wt-<branch-name>`. This is the primary location for Z.ai, not a workaround. The `/tmp/` directory is outside the repo (no .gitignore needed) and worktrees are ephemeral between sessions anyway. Skip all other location logic for Z.ai.
+
+**In other environments:**
+
 1. **Check your instructions for a declared worktree directory preference.** If the user has already specified one, use it without asking.
 
 2. **Check for an existing project-local worktree directory:**
    ```bash
    ls -d .worktrees 2>/dev/null     # Preferred (hidden)
    ls -d worktrees 2>/dev/null      # Alternative
-```text
+```
    If found, use it. If both exist, `.worktrees` wins.
 
 3. **Check for an existing global directory:**
    ```bash
    project=$(basename "$(git rev-parse --show-toplevel)")
    ls -d ~/.config/superpowers/worktrees/$project 2>/dev/null
-```text
+```
    If found, use it (backward compatibility with legacy global path).
 
 4. **If there is no other guidance available**, default to `.worktrees/` at the project root.
@@ -88,7 +92,7 @@ Follow this priority order. Explicit user preference always beats observed files
 
 ```bash
 git check-ignore -q .worktrees 2>/dev/null || git check-ignore -q worktrees 2>/dev/null
-```bash
+```
 
 **If NOT ignored:** Add to .gitignore, commit the change, then proceed.
 
@@ -107,7 +111,7 @@ project=$(basename "$(git rev-parse --show-toplevel)")
 
 git worktree add "$path" -b "$BRANCH_NAME"
 cd "$path"
-```bash
+```
 
 **Sandbox fallback (generic):** If `git worktree add` fails with a permission error (sandbox denial), tell the user the sandbox blocked worktree creation and you're working in the current directory instead. Then run setup and baseline tests in place.
 
@@ -119,7 +123,7 @@ Z.ai sandbox has a **full git repo** and `git worktree` works locally. However, 
 
 ```bash
 git remote -v
-```text
+```
 
 **If no remote is configured** (typical in fresh Z.ai sandbox), suggest to the user:
 
@@ -134,16 +138,16 @@ git remote -v
 ```bash
 # From the worktree directory or main repo:
 git push -u origin <branch-name>
-```text
+```
 
 **To restore a worktree in a new session:**
 
 ```bash
 git fetch origin
 git worktree add <path> -b <branch-name> origin/<branch-name>
-```markdown
+```
 
-**Z.ai-specific worktree placement:** Since Z.ai sandbox resets `/home/z/my-project/` content between sessions, prefer placing worktrees under `/tmp/` (e.g., `/tmp/wt-<branch-name>`) to avoid polluting the project directory. Add `/tmp/` worktree paths to `.gitignore` is not needed — `/tmp` is outside the repo.
+**Z.ai sandbox:** `/tmp/wt-<branch-name>` is the default location (see Directory Selection above). Project-local worktrees (`.worktrees/`) should not be used in Z.ai - they pollute the project directory and won't persist between sessions anyway.
 
 ## Step 3: Project Setup
 
@@ -162,7 +166,7 @@ if [ -f pyproject.toml ]; then poetry install; fi
 
 # Go
 if [ -f go.mod ]; then go mod download; fi
-```markdown
+```
 
 ## Step 4: Verify Clean Baseline
 
@@ -171,7 +175,7 @@ Run tests to ensure workspace starts clean:
 ```bash
 # Use project-appropriate command
 npm test / cargo test / pytest / go test ./...
-```text
+```
 
 **If tests fail:** Report failures, ask whether to proceed or investigate.
 
@@ -183,7 +187,7 @@ npm test / cargo test / pytest / go test ./...
 Worktree ready at <full-path>
 Tests passing (<N> tests, 0 failures)
 Ready to implement <feature-name>
-```markdown
+```
 
 ## Quick Reference
 
@@ -200,6 +204,7 @@ Ready to implement <feature-name>
 | Global path exists | Use it (backward compat) |
 | Directory not ignored | Add to .gitignore + commit |
 | Permission error on create | Sandbox fallback, work in place |
+| Z.ai sandbox | Use `/tmp/wt-<branch-name>` (primary), skip project-local dirs |
 | Z.ai sandbox, no remote | Suggest `git remote add origin`, create worktree anyway |
 | Z.ai sandbox, session end | Push worktree branches to remote before closing |
 | Z.ai sandbox, new session | `git fetch` + `git worktree add` from remote |

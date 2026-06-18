@@ -18,6 +18,15 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 **Save plans to:** `docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md`
 - (User preferences for plan location override this default)
 
+## Z.ai (ZCode) Adaptation
+
+In Z.ai, there is already a built-in `Outline` tool for structuring deliverables. The two tools serve different purposes:
+
+- **For document/visual deliverables (Type 1, Type 2):** Use the built-in `Outline` tool. It is simpler and better suited for document structure. This skill adds unnecessary overhead.
+- **For code development (Type 3) with multiple files and TDD:** Use this skill. It provides the bite-sized task structure, exact file paths, and test-first steps that `Outline` does not cover.
+
+In short: `Outline` is for document structure, `writing-plans` is for code implementation plans.
+
 ## Scope Check
 
 If the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans — one per subsystem. Each plan should produce working, testable software on its own.
@@ -58,7 +67,7 @@ This structure informs the task decomposition. Each task should produce self-con
 **Tech Stack:** [Key technologies/libraries]
 
 ---
-```markdown
+```
 
 ## Task Structure
 
@@ -76,7 +85,7 @@ This structure informs the task decomposition. Each task should produce self-con
 def test_specific_behavior():
     result = function(input)
     assert result == expected
-```text
+```
 
 - [ ] **Step 2: Run test to verify it fails**
 
@@ -88,7 +97,7 @@ Expected: FAIL with "function not defined"
 ```javascript
 def function(input):
     return expected
-```text
+```
 
 - [ ] **Step 4: Run test to verify it passes**
 
@@ -100,7 +109,7 @@ Expected: PASS
 ```bash
 git add tests/path/test.py src/path/file.py
 git commit -m "feat: add specific feature"
-```text
+```
 ```markdown
 
 ## No Placeholders

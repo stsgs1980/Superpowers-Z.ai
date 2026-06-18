@@ -23,7 +23,7 @@ You MUST create a task for each of these items and complete them in order:
 
 1. **Explore project context** — check files, docs, recent commits
 2. **Offer visual companion** (if topic will involve visual questions) — this is its own message, not combined with a clarifying question. See the Visual Companion section below.
-3. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria
+3. **Ask clarifying questions** - understand purpose/constraints/success criteria. In Z.ai: use AskUserQuestion tool to batch 4-8 questions in a single message
 4. **Propose 2-3 approaches** — with trade-offs and your recommendation
 5. **Present design** — in sections scaled to their complexity, get user approval after each section
 6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit
@@ -61,7 +61,7 @@ digraph brainstorming {
     "User reviews spec?" -> "Write design doc" [label="changes requested"];
     "User reviews spec?" -> "Invoke writing-plans skill" [label="approved"];
 }
-```markdown
+```
 
 **The terminal state is invoking writing-plans.** Do NOT invoke frontend-design, mcp-builder, or any other implementation skill. The ONLY skill you invoke after brainstorming is writing-plans.
 
@@ -72,9 +72,9 @@ digraph brainstorming {
 - Check out the current project state first (files, docs, recent commits)
 - Before asking detailed questions, assess scope: if the request describes multiple independent subsystems (e.g., "build a platform with chat, file storage, billing, and analytics"), flag this immediately. Don't spend questions refining details of a project that needs to be decomposed first.
 - If the project is too large for a single spec, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec -> plan -> implementation cycle.
-- For appropriately-scoped projects, ask questions one at a time to refine the idea
+- For appropriately-scoped projects, ask questions to refine the idea. In Z.ai: batch 4-8 questions via AskUserQuestion tool.
 - Prefer multiple choice questions when possible, but open-ended is fine too
-- Only one question per message - if a topic needs more exploration, break it into multiple questions
+- In Z.ai: multiple questions per message is the expected pattern. In other environments: one question per message.
 - Focus on understanding: purpose, constraints, success criteria
 
 **Exploring approaches:**
@@ -143,6 +143,27 @@ Wait for the user's response. If they request changes, make them and re-run the 
 - **Explore alternatives** - Always propose 2-3 approaches before settling
 - **Incremental validation** - Present design, get approval before moving on
 - **Be flexible** - Go back and clarify when something doesn't make sense
+
+## Z.ai (ZCode) Adaptation
+
+Z.ai has a built-in gate process (AskUserQuestion, Outline) that partially overlaps with brainstorming. The brainstorming PRINCIPLES remain valuable, but the INTERACTION PATTERN must adapt:
+
+**Interaction mode:**
+
+- Use the `AskUserQuestion` tool to batch 4-8 clarifying questions in a single message, NOT one-by-one Socratic dialogue. This matches Z.ai's UX pattern.
+- Keep the brainstorming PRINCIPLES: YAGNI, explore 2-3 alternatives, incremental validation, scope decomposition.
+- The design doc output and spec self-review steps remain unchanged.
+
+**When brainstorming applies vs. Z.ai built-in flow:**
+
+- For document/visual deliverables (Type 1, Type 2): Z.ai's built-in AskUserQuestion + Outline is sufficient. Brainstorming adds unnecessary overhead.
+- For code development (Type 3) with architectural decisions: use brainstorming principles BEFORE writing code. The brainstorming skill helps avoid unexamined assumptions in complex code projects.
+- For data processing (Type 4): usually not needed unless the task involves architectural choices.
+
+**Z.ai sandbox note:**
+
+- The Visual Companion server may not work in Z.ai sandbox due to port restrictions. If `start-server.sh` fails, proceed with text-only brainstorming.
+- Design docs save to `docs/superpowers/specs/` as specified, but this directory is ephemeral in Z.ai sandbox (persists only within the session).
 
 ## Visual Companion
 

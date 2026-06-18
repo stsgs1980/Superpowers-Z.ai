@@ -15,23 +15,22 @@ Execute plan by dispatching fresh subagent per task, with two-stage review after
 
 ## When to Use
 
-```dot
-digraph when_to_use {
-    "Have implementation plan?" [shape=diamond];
-    "Tasks mostly independent?" [shape=diamond];
-    "Stay in this session?" [shape=diamond];
-    "subagent-driven-development" [shape=box];
-    "executing-plans" [shape=box];
-    "Manual execution or brainstorm first" [shape=box];
+This skill is designed for multi-step **code development** tasks (building applications, implementing features, refactoring codebases). It dispatches 3+ subagents per task and is token-intensive.
 
-    "Have implementation plan?" -> "Tasks mostly independent?" [label="yes"];
-    "Have implementation plan?" -> "Manual execution or brainstorm first" [label="no"];
-    "Tasks mostly independent?" -> "Stay in this session?" [label="yes"];
-    "Tasks mostly independent?" -> "Manual execution or brainstorm first" [label="no - tightly coupled"];
-    "Stay in this session?" -> "subagent-driven-development" [label="yes"];
-    "Stay in this session?" -> "executing-plans" [label="no - parallel session"];
-}
-```text
+**Use this skill when:**
+
+- You have an implementation plan with independent tasks
+- The work involves writing and testing code across multiple files
+- You need two-stage review (spec compliance + code quality)
+
+**Skip this skill when:**
+
+- The task is document generation (Type 1) - use built-in Z.ai skills instead
+- The task is data visualization (Type 2) - use the charts skill
+- The task is simple data processing (Type 4) - work inline
+- The task is a single-file change or trivial fix - work inline
+
+In Z.ai, the built-in Task tool already provides typed subagents (full-stack-developer, Explore, Plan). Use this skill only when you need the specific two-stage review workflow on top of those subagents.
 
 **vs. Executing Plans (parallel session):**
 - Same session (no context switch)
@@ -84,7 +83,7 @@ digraph process {
     "More tasks remain?" -> "Dispatch final code reviewer subagent for entire implementation" [label="no"];
     "Dispatch final code reviewer subagent for entire implementation" -> "Use superpowers:finishing-a-development-branch";
 }
-```markdown
+```
 
 ## Model Selection
 
@@ -199,7 +198,7 @@ Code reviewer: ✅ Approved
 Final reviewer: All requirements met, ready to merge
 
 Done!
-```markdown
+```
 
 ## Advantages
 

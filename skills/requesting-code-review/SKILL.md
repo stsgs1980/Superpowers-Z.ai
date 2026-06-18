@@ -5,9 +5,20 @@ description: Use when completing tasks, implementing major features, or before m
 
 # Requesting Code Review
 
-Dispatch a code reviewer subagent to catch issues before they cascade. The reviewer gets precisely crafted context for evaluation — never your session's history. This keeps the reviewer focused on the work product, not your thought process, and preserves your own context for continued work.
+Dispatch a code reviewer subagent to catch issues before they cascade. The reviewer gets precisely crafted context for evaluation - never your session's history. This keeps the reviewer focused on the work product, not your thought process, and preserves your own context for continued work.
 
 **Core principle:** Review early, review often.
+
+## Z.ai (ZCode) Adaptation
+
+This skill is designed to work as part of the subagent-driven-development workflow. In Z.ai, it dispatches a `general-purpose` subagent via the Task tool.
+
+This skill is useful only when:
+
+- You are executing a multi-step code implementation plan with subagent-driven-development
+- You have completed a task and need an independent review before proceeding
+
+For simpler review needs, the built-in `sp-receiving-code-review` skill (mental patterns) covers the key ideas: verify feedback against code, push back with reasoning, check YAGNI.
 
 ## When to Request Review
 
@@ -27,7 +38,7 @@ Dispatch a code reviewer subagent to catch issues before they cascade. The revie
 ```bash
 BASE_SHA=$(git rev-parse HEAD~1)  # or origin/main
 HEAD_SHA=$(git rev-parse HEAD)
-```text
+```
 
 **2. Dispatch code reviewer subagent:**
 
@@ -70,7 +81,7 @@ HEAD_SHA=$(git rev-parse HEAD)
 
 You: [Fix progress indicators]
 [Continue to Task 3]
-```markdown
+```
 
 ## Integration with Workflows
 

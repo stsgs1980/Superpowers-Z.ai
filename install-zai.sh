@@ -2,7 +2,9 @@
 # install-zai.sh - Z.ai installer for Superpowers skills
 # Usage:
 #   bash install-zai.sh              # install or update all skills
+#   bash install-zai.sh --core-only  # install only Tier 1+2 skills (8 skills, skip Tier 3)
 #   bash install-zai.sh --force      # reinstall even if exists (overwrite)
+#   bash install-zai.sh --force --core-only  # force reinstall core skills only
 #   bash install-zai.sh uninstall    # remove all sp-* skills
 #   bash install-zai.sh status       # show installed vs available
 #
@@ -26,6 +28,10 @@ else
 fi
 
 ACTION="${1:-install}"
+CORE_ONLY=false
+for arg in "$@"; do
+    if [ "$arg" = "--core-only" ]; then CORE_ONLY=true; fi
+done
 
 # --- List of all skill directories (source names, before sp- prefix) ---
 ALL_SKILLS=(
@@ -45,15 +51,40 @@ ALL_SKILLS=(
     writing-skills
 )
 
+# Core skills: Tier 1 (directly useful) + Tier 2 (useful with adaptation)
+# Skip: executing-plans (redundant with subagent-driven-development),
+#        finishing-a-development-branch (not applicable to Z.ai),
+#        using-superpowers (needs manual invocation, no auto-inject hook)
+CORE_SKILLS=(
+    brainstorming
+    dispatching-parallel-agents
+    receiving-code-review
+    requesting-code-review
+    sp-writing-plans
+    subagent-driven-development
+    systematic-debugging
+    test-driven-development
+    using-git-worktrees
+    verification-before-completion
+    writing-skills
+)
+
+# Select which list to use
+if [ "$CORE_ONLY" = true ]; then
+    SKILLS=("${CORE_SKILLS[@]}")
+else
+    SKILLS=("${ALL_SKILLS[@]}")
+fi
+
 # --- Status ---
 if [ "$ACTION" = "status" ]; then
-    echo "superpowers-zai install status"
+    echo "superpowers-zai install status ($([ "$CORE_ONLY" = true ] && echo "core-only" || echo "all skills"))"
     echo "Source: $PLUGIN_SKILLS"
     echo "Target: $TARGET_DIR"
     echo ""
     printf "%-40s %s\n" "SKILL" "STATUS"
     printf "%-40s %s\n" "-----" "------"
-    for skill in "${ALL_SKILLS[@]}"; do
+    for skill in "${SKILLS[@]}"; do
         src="$PLUGIN_SKILLS/$skill"
         # Target always has sp- prefix
         if [[ "$skill" == sp-* ]]; then
@@ -107,11 +138,11 @@ if [ "$ACTION" = "--force" ] || [ "$ACTION" = "install" ]; then
         FORCE=true
     fi
 else
-    echo "Usage: bash install-zai.sh [--force|uninstall|status]"
+    echo "Usage: bash install-zai.sh [--force] [--core-only] | uninstall | status"
     exit 1
 fi
 
-echo "Installing superpowers skills for Z.ai..."
+echo "Installing superpowers skills for Z.ai$([ "$CORE_ONLY" = true ] && echo " (core-only)" || echo "")..."
 echo "Source:  $PLUGIN_SKILLS"
 echo "Target:  $TARGET_DIR"
 echo ""
