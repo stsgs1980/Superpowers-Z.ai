@@ -56,6 +56,28 @@ bash .superpowers-zai/install-zai.sh
 bash .superpowers-zai/install-zai.sh uninstall
 ```
 
+#### OpenCode
+
+OpenCode discovers skills from `.opencode/skills/` directory. Two options:
+
+**Option 1: Git submodule (recommended)**
+```bash
+cd /path/to/your-project
+git submodule add https://github.com/stsgs1980/Superpowers-Z.ai.git .superpowers-zai
+ln -s .superpowers-zai/skills .opencode/skills
+```
+
+**Option 2: Global install (all projects)**
+```bash
+mkdir -p ~/.config/opencode/skills
+cp -r /path/to/Superpowers-Z.ai/skills/* ~/.config/opencode/skills/
+```
+
+After setup, invoke at session start:
+```
+Skill(command="sp-using-superpowers")
+```
+
 #### Claude Code
 
 Superpowers is available via the [official Claude plugin marketplace](https://claude.com/plugins/superpowers).
