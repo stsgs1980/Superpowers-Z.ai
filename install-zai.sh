@@ -217,12 +217,8 @@ echo "Summary: $installed installed, $updated updated, $skipped unchanged"
 
 if [ "$updated" -gt 0 ] || [ "$skipped" -gt 0 ]; then
     echo ""
-    echo "NOTE: In Z.ai sandbox, there is no hook system to auto-inject"
-    echo "the 'using-superpowers' entry skill. Options:"
-    echo ""
-    echo "  1. Manual: Invoke Skill(command=\"sp-using-superpowers\") at session start"
-    echo "  2. Auto:   Add the content of sp-using-superpowers/SKILL.md to your"
-    echo "            system prompt configuration (if your setup supports it)"
+    echo "NOTE: Invoke Skill(command=\"sp-using-superpowers\") at session start"
+    echo "or add its content to your system prompt."
 fi
 
 echo ""
