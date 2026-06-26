@@ -135,6 +135,44 @@ Next up, once you say "go", it launches a subagent-driven-development process, h
 
 There's a bunch more to it, but that's the core of the system. And because the skills trigger automatically, you don't need to do anything special. Your coding agent just has Superpowers.
 
+## Z.ai (ZCode) Usage
+
+### Session Start
+
+Z.ai does not have a hook system to auto-inject the entry skill. You must manually activate Superpowers at the start of each session:
+
+**Option 1: Invoke the skill**
+```
+Skill(command="sp-using-superpowers")
+```
+
+**Option 2: Add to system prompt**
+Copy the content of `skills/using-superpowers/SKILL.md` into your system prompt configuration.
+
+### How Components Work
+
+| Component | How it works | Enforcement |
+|-----------|-------------|-------------|
+| **Skills** | Loaded via `Skill()` tool | Iron Law (TDD, debugging, verification) enforced by skill content |
+| **Commands** | Slash commands (`/commit`, `/review-pr`, etc.) | Instructions embedded in command file |
+| **Agents** | Launched via `Task()` tool | Independent analysis, returns structured results |
+
+### Iron Law Enforcement
+
+The three Iron Laws are enforced through skill content, not hooks:
+
+- **TDD Iron Law**: `test-driven-development` skill — RED-GREEN-REFACTOR cycle. Code written before tests is deleted.
+- **Debugging Iron Law**: `systematic-debugging` skill — 4-phase root cause process. No fixes without understanding.
+- **Verification Iron Law**: `verification-before-completion` skill — No false claims. Evidence required before delivery.
+
+When a skill is loaded, its content becomes part of the context. The agent follows the instructions as mandatory workflows, not suggestions.
+
+### Limitations
+
+- **No auto-injection**: `using-superpowers` must be invoked manually at session start
+- **No hook lifecycle**: SessionStart, Stop hooks from original superpowers do not work
+- **No automatic skill triggering**: Skills must be explicitly loaded via `Skill()` tool
+
 ## The Basic Workflow
 
 1. **brainstorming** - Activates before writing code. Refines rough ideas through questions, explores alternatives, presents design in sections for validation. Saves design document.
