@@ -2,6 +2,28 @@
 
 Superpowers is a complete software development methodology for your coding agents, built on top of a set of composable skills and some initial instructions that make sure your agent uses them. This fork is adapted for the Z.ai (ZCode) sandbox environment with git submodule-based installation and update support.
 
+
+[![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=flat-square)](https://openai.com)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
+
+
+## Table of Contents
+
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Fetch and follow instructions from the upstream install guide](#fetch-and-follow-instructions-from-the-upstream-install-guide)
+- [See docs/README.opencode.md for details](#see-docsreadmeopencodemd-for-details)
+- [How It Works](#how-it-works)
+- [Z.ai (ZCode) Usage](#zai-zcode-usage)
+- [The Basic Workflow](#the-basic-workflow)
+- [What's Inside](#what's-inside)
+- [Updating](#updating)
+- [Contributing](#contributing)
+- [License](#license)
+- [Community](#community)
+
 ## Features
 
 - Brainstorming and spec refinement through Socratic dialogue with Visual Companion
@@ -74,7 +96,7 @@ cp -r /path/to/Superpowers-Z.ai/skills/* ~/.config/opencode/skills/
 ```
 
 After setup, invoke at session start:
-```
+```bash
 Skill(command="sp-using-superpowers")
 ```
 
@@ -129,8 +151,8 @@ gemini extensions install https://github.com/obra/superpowers
 #### OpenCode
 
 ```bash
-# Fetch and follow instructions from the upstream install guide
-# See docs/README.opencode.md for details
+## Fetch and follow instructions from the upstream install guide
+## See docs/README.opencode.md for details
 ```
 
 #### Cursor
@@ -164,7 +186,7 @@ There's a bunch more to it, but that's the core of the system. And because the s
 Z.ai does not have a hook system to auto-inject the entry skill. You must manually activate Superpowers at the start of each session:
 
 **Option 1: Invoke the skill**
-```
+```bash
 Skill(command="sp-using-superpowers")
 ```
 
@@ -303,6 +325,3 @@ Superpowers is built by [Jesse Vincent](https://blog.fsck.com) and the rest of t
 - **Issues**: https://github.com/obra/superpowers/issues
 - **Release announcements**: [Sign up](https://primeradiant.com/superpowers/) to get notified about new versions
 
----
-
-Built with: Markdown + Bash + Git + JavaScript
